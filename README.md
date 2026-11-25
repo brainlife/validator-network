@@ -1,64 +1,73 @@
-[![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/brand/brainlife-mark-on-dark.svg">
+    <img src=".github/brand/brainlife-mark-on-light.svg" alt="brainlife.io" width="140">
+  </picture>
+</p>
 
-# Network Validator
-This is a validator for the `generic/network` datatype in brainlife.
+<h1 align="center">validator-network</h1>
 
+<p align="center">
+  Checks <code>generic/network</code> datasets before brainlife.io archives them.
+</p>
 
-### Authors
-- [Filipi N. Silva](https://filipinascimento.github.io)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/Status-dormant-yellow.svg" alt="Status: dormant">
+  <a href="https://brainlife.io"><img src="https://img.shields.io/badge/brainlife.io-site-3b9fd0.svg" alt="brainlife.io"></a>
+  <a href="https://brainlife.io/docs"><img src="https://img.shields.io/badge/Docs-brainlife.io%2Fdocs-005981.svg" alt="Documentation"></a>
+  <a href="https://doi.org/10.1038/s41592-024-02237-2"><img src="https://img.shields.io/badge/DOI-10.1038%2Fs41592--024--02237--2-e57536.svg" alt="Nature Methods paper"></a>
+</p>
 
-### Contributors
-- [Franco Pestilli](https://liberalarts.utexas.edu/psychology/faculty/fp4834)
+## 🧠 At a glance
 
+| | |
+|---|---|
+| 🗂️ **Datatype** | `generic/network` |
+| 🐳 **Container** | filsilva/cxnetwork:0.2.0 |
+| 📜 **Script** | [`main.py`](main.py) |
+| 🕰️ **Last change** | 2021-10-07 |
 
-### Funding
-[![NIH-1R01EB029272-01](https://img.shields.io/badge/NIH-1R01EB029272_01-blue.svg)](https://projectreporter.nih.gov/project_info_description.cfm?aid=9916138&icde=52173380&ddparam=&ddvalue=&ddsub=&cr=1&csb=default&cs=ASC&pball=)
+## ✅ What it checks
 
-### Citations
+- Loads `network.json.gz` (JSON Graph Format) with jgf and igraph
+- Links the network into `output/` and reports errors if it cannot be read
 
-1. Bassett, Danielle S., and Olaf Sporns. "Network neuroscience." Nature neuroscience 20, no. 3 (2017): 353. [https://doi.org/10.1038/nn.4502](https://doi.org/10.1038/nn.4502)
+## ⚙️ How brainlife.io runs it
 
+Each brainlife datatype names a validator. When a dataset of that datatype is uploaded (or written by an App), brainlife.io runs this repository like an App: `main` reads `config.json` (one key per file of the datatype), runs `main.py`, writes `product.json` with `errors` and `warnings` (and sometimes tags, datatype tags or summary plots) and links the normalized files into `output/`. Errors fail the validation; warnings are shown with the dataset.
 
-## Running the App 
-
-### On Brainlife.io
-
-You can submit this App online at [https://doi.org/10.25663/brainlife.app.289](https://doi.org/10.25663/brainlife.app.289) via the "Execute" tab.
-
-### Running Locally (on your machine)
-Singularity is required to run the package locally.
-
-1. git clone this repo.
-
-```bash
-git clone <repository URL>
-cd <repository PATH>
-```
-
-2. Inside the cloned directory, edit `config-sample.json` with your data or use the provided data.
-
-3. Rename `config-sample.json` to `config.json` .
-
-```bash
-mv config-sample.json config.json
-```
-
-4. Launch the App by executing `main`
+## 💻 Run it locally
 
 ```bash
+git clone https://github.com/brainlife/validator-network && cd validator-network
+cp config-sample.json config.json        # point each key at your files
 ./main
+cat product.json
 ```
 
-### Sample Datasets
+Needs Singularity/Apptainer.
 
-A sample dataset is provided in folder `data` and `config-sample.json`
+## 👥 Credits
 
+Author: [Filipi N. Silva](https://filipinascimento.github.io). Sample data are in `data/`. Also registered as a brainlife App: [doi:10.25663/brainlife.app.289](https://doi.org/10.25663/brainlife.app.289).
 
-### Dependencies
+## 🔗 Related
 
-This App only requires [singularity](https://www.sylabs.io/singularity/) to run. If you don't have singularity, you will need to install the python packages defined in `environment.yml`, then you can run the code directly from python using:  
+[warehouse-next](https://github.com/brainlife/warehouse-next) (datatypes and validation) · [abcd-spec](https://github.com/brainlife/abcd-spec) (how Apps and validators run) · [all validators](https://github.com/brainlife?q=validator-&type=all)
 
-```bash
-./main.py config.json
-```
+## 📚 Citing
 
+If you use brainlife.io in your work, please cite:
+
+> Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome in this repository. For help using brainlife.io, see the [documentation](https://brainlife.io/docs).
+
+## ⚖️ License
+
+[MIT](LICENSE).
+
+<p align="center"><sub>brainlife.io · Brain data across scales. One place to analyze, share and publish it. · The University of Texas at Austin</sub></p>
